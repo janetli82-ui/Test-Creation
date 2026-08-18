@@ -1,4 +1,4 @@
-import {render, screen, fireEvent} from "@testing-library/react"
+import {render, screen, fireEvent, Matcher} from "@testing-library/react"
 import Home from "@/app/page"
 import { travelList } from "@/data/city"
 
@@ -28,7 +28,7 @@ describe("Home component", () => {
     fireEvent.change(selectedCity as HTMLSelectElement, { target: { value: mockCity.name } })
     expect((selectedCity as HTMLSelectElement).value).toBe(mockCity.name)
 
-    mockCity.allPackLists.forEach(list => {
+    mockCity.allPackLists.forEach((list: Matcher) => {
       const item = screen.getByText(list)
       expect(item).toBeInTheDocument()
     })
