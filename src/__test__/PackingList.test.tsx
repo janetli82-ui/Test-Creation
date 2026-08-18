@@ -1,4 +1,4 @@
-import {render, screen, fireEvent} from "@testing-library/react"
+import {render, screen, fireEvent, Matcher} from "@testing-library/react"
 import PackingList from "../components/PackingList"
 import { travelList } from "@/data/city"
 
@@ -28,7 +28,7 @@ describe("the packingList renders correctly", () => {
 
   test("renders all packing list items from allPackLists", () => {
     render(<PackingList name={mockCity.name} img={mockCity.img} selectedId={mockCity.id} selectedLists={mockSelectedLists} updateFunction={mockFunction} updateClick={mockClick}/>)
-    mockCity.allPackLists.forEach(list => {
+    mockCity.allPackLists.forEach((list: Matcher) => {
       const packs = screen.getByLabelText(list)
       expect(packs).toBeInTheDocument()
     })
