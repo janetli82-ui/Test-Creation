@@ -37,4 +37,24 @@ describe("Home component", () => {
     expect(listItems).toHaveLength(mockCity.allPackLists.length)
   })
 
+  test("scoring", () => {
+    render(<Home />)
+
+    const selectedCity = screen.getByTestId("city") as HTMLSelectElement
+    fireEvent.change(selectedCity, {target: {value: "Paris"}})
+
+    const checkboxes = screen.getAllByRole("checkbox")
+
+    fireEvent.click(checkboxes[0])
+    fireEvent.click(checkboxes[1])
+    fireEvent.click(checkboxes[2])
+    fireEvent.click(checkboxes[3])
+    fireEvent.click(checkboxes[4])
+
+    const updatedCheckboxes = screen.getAllByRole("checkbox") as HTMLInputElement[]
+    const checkedCount = updatedCheckboxes.filter(cb => cb.checked).length 
+    
+    expect(checkedCount).toBe(5)
+  })
+
 })
